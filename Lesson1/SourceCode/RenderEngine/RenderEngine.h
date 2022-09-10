@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <memory>
 
 #include "Common.h"
 #include "RenderObject.h"
@@ -25,5 +26,5 @@ private:
 	long m_Height = 600;
 
 	std::chrono::high_resolution_clock::time_point m_renderStart;
-	Octahedron* m_defaultTetr;
+	std::unique_ptr<Octahedron> m_defaultOctahedron;
 };

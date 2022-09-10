@@ -33,7 +33,7 @@ CRenderEngine::CRenderEngine(HINSTANCE hInstance)
 	bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0xab29e2cc, 1.0f, 0);
 	bgfx::setViewRect(0, 0, 0, bgfx::BackbufferRatio::Equal);
 	
-	m_defaultTetr = new Octahedron();
+	m_defaultOctahedron = std::make_unique<Octahedron>();
 	m_renderStart = std::chrono::high_resolution_clock::now();
 }
 
@@ -75,8 +75,8 @@ HWND CRenderEngine::InitMainWindow(HINSTANCE hInstance)
 
 	RECT R = { 0, 0, m_Width, m_Height };
 	AdjustWindowRect(&R, defaultStyle, false);
-	int width = R.right - R.left;
-	int height = R.bottom - R.top;
+	auto width = R.right - R.left;
+	auto height = R.bottom - R.top;
 
 	hwnd = CreateWindow(wstrWindowName.c_str(), wstrWindowCaption.c_str(),
 		defaultStyle, CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, hInstance, nullptr);
@@ -114,10 +114,10 @@ void CRenderEngine::Update()
 	bgfx::setTransform(modelTransform);
 	bgfx::setViewTransform(0, view, proj);
 
-	bgfx::setVertexBuffer(0, m_defaultTetr->GetVertexBuffer());
-	bgfx::setIndexBuffer(m_defaultTetr->GetIndexBuffer());
+	bgfx::setVertexBuffer(0, m_defaultOctahedron->GetVertexBuffer());
+	bgfx::setIndexBuffer(m_defaultOctahedron->GetIndexBuffer());
 
-	bgfx::submit(0, m_defaultTetr->GetProgramHandle());
+	bgfx::submit(0, m_defaultOctahedron->GetProgramHandle());
 
 	bgfx::touch(0);
 
