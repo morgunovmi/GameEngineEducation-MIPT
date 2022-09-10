@@ -30,10 +30,11 @@ CRenderEngine::CRenderEngine(HINSTANCE hInstance)
 	if (!bgfx::init(bgfxInit))
 		assert(0);
 
-	bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
+	bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0xab29e2cc, 1.0f, 0);
 	bgfx::setViewRect(0, 0, 0, bgfx::BackbufferRatio::Equal);
-
-	m_defaultCube = new Cube();
+	
+	m_defaultTetr = new Octahedron();
+	m_renderStart = std::chrono::high_resolution_clock::now();
 }
 
 CRenderEngine::~CRenderEngine()
@@ -93,18 +94,30 @@ HWND CRenderEngine::InitMainWindow(HINSTANCE hInstance)
 
 void CRenderEngine::Update()
 {
+	const auto timeSinceStart = std::chrono
+		::duration<float>{ std::chrono::high_resolution_clock::now() - m_renderStart }.count();
+
 	const bx::Vec3 at = { 0.0f, 0.0f,  0.0f };
-	const bx::Vec3 eye = { 0.0f, 10.0f, -5.0f };
+	const bx::Vec3 eye = { 0.0f, 1.0f, -5.0f };
+
+	float modelTransform[16];
+	bx::mtxRotateXYZ(modelTransform, 0.1f * timeSinceStart,
+									 0.2f * timeSinceStart,
+									 0.1f * timeSinceStart);
+
 	float view[16];
 	bx::mtxLookAt(view, eye, at);
+
 	float proj[16];
-	bx::mtxProj(proj, 60.0f, float(m_Width) / float(m_Height), 0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
+	bx::mtxProj(proj, 60.0f, float(m_Width) / float(m_Height), 0.01f, 100.0f, bgfx::getCaps()->homogeneousDepth);
+
+	bgfx::setTransform(modelTransform);
 	bgfx::setViewTransform(0, view, proj);
 
-	bgfx::setVertexBuffer(0, m_defaultCube->GetVertexBuffer());
-	bgfx::setIndexBuffer(m_defaultCube->GetIndexBuffer());
+	bgfx::setVertexBuffer(0, m_defaultTetr->GetVertexBuffer());
+	bgfx::setIndexBuffer(m_defaultTetr->GetIndexBuffer());
 
-	bgfx::submit(0, m_defaultCube->GetProgramHandle());
+	bgfx::submit(0, m_defaultTetr->GetProgramHandle());
 
 	bgfx::touch(0);
 

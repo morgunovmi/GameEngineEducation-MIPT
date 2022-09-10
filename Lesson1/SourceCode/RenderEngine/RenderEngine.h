@@ -1,8 +1,11 @@
 #pragma once
 
+#include <chrono>
+
 #include "Common.h"
 #include "RenderObject.h"
 #include "DefaultGeometry/Cube.h"
+#include "DefaultGeometry/Octahedron.h"
 
 class RENDERENGINE_API CRenderEngine
 {
@@ -20,5 +23,7 @@ private:
 
 	long m_Width = 800;
 	long m_Height = 600;
-	Cube* m_defaultCube;
+
+	std::chrono::high_resolution_clock::time_point m_renderStart;
+	Octahedron* m_defaultTetr;
 };
