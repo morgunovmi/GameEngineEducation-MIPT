@@ -6,57 +6,15 @@
 #include <crtdbg.h>
 #endif
 
-#include <INIReader.h>
-
-#include <filesystem>
+#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
 
 #include "GameEngine.h"
 #include "RenderEngine.h"
 #include "RenderThread.h"
 #include "CubeGameObject.h"
 #include "GameTimer.h"
-#include "Input.h"
-#include "ControlConfig.h"
-
-void PrintKeyboardMessages(const MSG& msg)
-{
-    wchar_t msg_string[32];
-    const auto uMsg = msg.message;
-    const auto wParam = msg.wParam;
-    switch (uMsg)
-    {
-    case WM_SYSKEYDOWN:
-        swprintf_s(msg_string, L"WM_SYSKEYDOWN: 0x%x\n", wParam);
-        OutputDebugString(msg_string);
-        break;
-
-    case WM_SYSCHAR:
-        swprintf_s(msg_string, L"WM_SYSCHAR: %c\n", (wchar_t)wParam);
-        OutputDebugString(msg_string);
-        break;
-
-    case WM_SYSKEYUP:
-        swprintf_s(msg_string, L"WM_SYSKEYUP: 0x%x\n", wParam);
-        OutputDebugString(msg_string);
-        break;
-
-    case WM_KEYDOWN:
-        swprintf_s(msg_string, L"WM_KEYDOWN: 0x%x\n", wParam);
-        OutputDebugString(msg_string);
-        break;
-
-    case WM_KEYUP:
-        swprintf_s(msg_string, L"WM_KEYUP: 0x%x\n", wParam);
-        OutputDebugString(msg_string);
-        break;
-
-    case WM_CHAR:
-        swprintf_s(msg_string, L"WM_CHAR: %c\n", (wchar_t)wParam);
-        OutputDebugString(msg_string);
-        break;
-
-    }
-}
+#include "WinUtils.h"
+#include "Config.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -68,24 +26,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-    ControlConfig config{};
-    INIReader reader("config.ini");
-
-    if (reader.ParseError() < 0) {
-        wchar_t str[32];
-        swprintf_s(str, L"Couldn't parse config file\n");
-        OutputDebugString(str);
-        return 1;
-    }
-
-    for (const auto& section : reader.GetSections()) {
-        for (const auto& field : reader.GetFields(section)) {
-            const auto s = reader.Get(section, field, "meme");
-            wchar_t str[32];
-            swprintf_s(str, L"%s\n", s.c_str());
-            OutputDebugString(str);
-        }
-    }
+    auto inputConfig = GetInputConfig("config.ini");
 
     const float moveSpeed = 10.f;
 
@@ -117,27 +58,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             timer.Tick();
 
             float moveDelta[3] = {0, 0, 0};
-            if (Keyboard::IsKeyPressed(Keyboard::W))
+            if (IsKeyPressed(inputConfig[MoveForward]))
             {
                 moveDelta[2] += moveSpeed * timer.DeltaTime();
             }
-            if (Keyboard::IsKeyPressed(Keyboard::A))
+            if (IsKeyPressed(inputConfig[MoveLeft]))
             {
                 moveDelta[0] -= moveSpeed * timer.DeltaTime();
             }
-            if (Keyboard::IsKeyPressed(Keyboard::S))
+            if (IsKeyPressed(inputConfig[MoveBack]))
             {
                 moveDelta[2] -= moveSpeed * timer.DeltaTime();
             }
-            if (Keyboard::IsKeyPressed(Keyboard::D))
+            if (IsKeyPressed(inputConfig[MoveRight]))
             {
                 moveDelta[0] += moveSpeed * timer.DeltaTime();
             }
-            if (Keyboard::IsKeyPressed(Keyboard::Space))
+            if (IsKeyPressed(inputConfig[MoveUp]))
             {
                 moveDelta[1] += moveSpeed * timer.DeltaTime();
             }
-            if (Keyboard::IsKeyPressed(Keyboard::LControl))
+            if (IsKeyPressed(inputConfig[MoveDown]))
             {
                 moveDelta[1] -= moveSpeed * timer.DeltaTime();
             }

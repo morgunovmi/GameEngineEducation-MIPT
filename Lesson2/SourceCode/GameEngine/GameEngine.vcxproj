@@ -171,12 +171,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ControlConfig.h" />
+    <ClInclude Include="Actions.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="CubeGameObject.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameTimer.h" />
-    <ClInclude Include="Input.h" />
+    <ClInclude Include="Keys.h" />
+    <ClInclude Include="WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CubeGameObject.cpp" />
