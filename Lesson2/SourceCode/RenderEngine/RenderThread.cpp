@@ -3,20 +3,13 @@
 
 template void RENDERENGINE_API RenderThread::EnqueueCommand<RenderProxy*>(ERenderCommand command, RenderProxy* renderProxy);
 
-// Function to run render thread
-static void RunThisThread(void* thisPtr)
-{
-	RenderThread* const self = reinterpret_cast<RenderThread*>(thisPtr);
-	self->Run();
-}
-
 RenderThread::RenderThread(RenderEngine* pRenderEngine) :
 	m_pRenderEngine(pRenderEngine),
 	m_nRenderThreadId(0)
 {
 	m_nMainThreadId = ::GetCurrentThreadId();
 
-	m_pThread = std::make_unique<std::thread>(RunThisThread, this);
+	m_pThread = std::make_unique<std::thread>(&RenderThread::Run, this);
 }
 
 // Render Loop
@@ -31,7 +24,7 @@ void RenderThread::Run()
 		if (m_nCurrFrame == m_nFrameToFill)
 		{
 			std::unique_lock lock(frameMutex[m_nCurrFrame]);
-			cv.wait(lock, [this] {return m_commandListIsReady; });
+			cv.wait(lock, [this] { return m_commandListIsReady; });
 			m_commandListIsReady = false;
 		}
 
@@ -78,9 +71,11 @@ void RenderThread::EnqueueCommand(ERenderCommand command, Args... args)
 
 void RenderThread::ProcessCommands()
 {
-	for (auto& command : m_commands[m_nCurrFrame])
+	for (const auto & command : m_commands[m_nCurrFrame])
 		command->DoTask();
 
+	for (const auto& command : m_commands[m_nCurrFrame])
+		delete command;
 	m_commands[m_nCurrFrame].clear();
 }
 

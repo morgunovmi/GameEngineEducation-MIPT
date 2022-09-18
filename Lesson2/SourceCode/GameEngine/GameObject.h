@@ -14,6 +14,8 @@ public:
 	}
 
 	void SetPosition(float x, float y, float z);
+	void Translate(float delta[]);
+	float* GetPosition() const;
 
 	RenderProxy* const GetRenderProxy() { return m_pRenderProxy; }
 protected:

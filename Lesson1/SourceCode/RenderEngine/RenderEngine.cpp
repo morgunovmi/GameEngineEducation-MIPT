@@ -101,6 +101,7 @@ void CRenderEngine::Update()
 	const bx::Vec3 eye = { 0.0f, 1.0f, -5.0f };
 
 	float modelTransform[16];
+
 	bx::mtxRotateXYZ(modelTransform, 0.1f * timeSinceStart,
 									 0.2f * timeSinceStart,
 									 0.1f * timeSinceStart);
