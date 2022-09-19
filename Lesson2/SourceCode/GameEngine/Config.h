@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-#include <INIReader.h>
+#include "INIReader.h"
 
 #include "Actions.h"
 #include "Keys.h"
