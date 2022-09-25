@@ -4,7 +4,7 @@
 
 class ControllableCubeGameObject final : public CubeGameObject {
 public:
-	ControllableCubeGameObject() : CubeGameObject(), m_acceleration(1.f) {}
+	ControllableCubeGameObject() : CubeGameObject(), m_acceleration(2.f) {}
 
 	float GetAcc() const { return m_acceleration; }
 private:

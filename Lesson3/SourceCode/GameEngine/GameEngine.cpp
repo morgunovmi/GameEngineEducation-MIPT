@@ -51,7 +51,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             case eOT_Roaming:
             {
                 auto cube = std::make_unique<RoamingCubeGameObject>();
-                cube->SetPosition(i * 3.0, 0, j * 3.0);
+                cube->SetPosition(i * 4.0, 0, j * 4.0);
                 renderThread->EnqueueCommand(RC_CreateCubeRenderObject, cube->GetRenderProxy());
                 objects.insert(std::make_pair(std::move(cube), eOT_Roaming));
                 break;
@@ -59,7 +59,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             case eOT_Jumping:
             {
                 auto cube = std::make_unique<JumpingCubeGameObject>();
-                cube->SetPosition(i * 3.0, 4, j * 3.0);
+                cube->SetPosition(i * 4.0, 6, j * 4.0);
                 renderThread->EnqueueCommand(RC_CreateCubeRenderObject, cube->GetRenderProxy());
                 objects.insert(std::make_pair(std::move(cube), eOT_Jumping));
                 break;
@@ -67,7 +67,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             case eOT_Controllable:
             {
                 auto cube = std::make_unique<ControllableCubeGameObject>();
-                cube->SetPosition(i * 3.0, 0, j * 3.0);
+                cube->SetPosition(i * 4.0, 0, j * 4.0);
                 renderThread->EnqueueCommand(RC_CreateCubeRenderObject, cube->GetRenderProxy());
                 objects.insert(std::make_pair(std::move(cube), eOT_Controllable));
                 break;
@@ -83,7 +83,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     timer.Start();
     timer.Reset();
 
-    float gravity = -.981f;
+    float gravity = -.981f * 2.f;
 
     // Main message loop:
     while (msg.message != (WM_QUIT | WM_CLOSE))
@@ -106,7 +106,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 {
                     auto* roaming = static_cast<RoamingCubeGameObject*>(obj.get());
                     auto* curPos = roaming->GetPosition();
-                    roaming->SetPosition(curPos[0], curPos[1], curPos[2] + 0.5 * sin(timer.TotalTime() * roaming->GetSpeed()));
+                    roaming->SetPosition(curPos[0], curPos[1], curPos[2] + 0.1 * sin(timer.TotalTime() * roaming->GetSpeed()));
                     break;
                 }
                 case eOT_Jumping:
@@ -116,12 +116,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                     auto* curVel = jumping->GetVelocity();
                     curVel[1] += gravity * timer.DeltaTime();
 
-                    auto *curPos = jumping->GetPosition();
+                    auto* curPos = jumping->GetPosition();
                     curPos[1] += curVel[1] * timer.DeltaTime();
 
-                    if (curPos[1] < 0.0f)
+                    if (curPos[1] < 0.1f)
                     {
-                        curVel[1] = std::abs(curVel[1]);
+                        curVel[1] = 1.02f * std::abs(curVel[1]);
                     }
 
                     jumping->SetVelocity(curVel[0], curVel[1], curVel[2]);
