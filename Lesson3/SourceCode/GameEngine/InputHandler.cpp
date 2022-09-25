@@ -13,9 +13,13 @@ InputHandler::InputHandler()
 	MapSymbol("d", 'D');
 	MapSymbol("left", VK_LEFT);
 	MapSymbol("right", VK_RIGHT);
+	MapSymbol("w", 'W');
+	MapSymbol("s", 'S');
 
 	MapCommandSymbol("GoLeft", eIC_GoLeft, "a");
 	MapCommandSymbol("GoRight", eIC_GoRight, "d");
+	MapCommandSymbol("GoForward", eIC_GoForward, "w");
+	MapCommandSymbol("GoBack", eIC_GoBack, "s");
 
 	LoadConfiguration();
 
