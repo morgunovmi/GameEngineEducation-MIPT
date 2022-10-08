@@ -15,6 +15,13 @@ public:
 	}
 	void SetPosition(float position[3]);
 
+	float GetScale()
+	{
+		return m_scale;
+	}
+	void SetScale(float scale) { m_scale = scale; }
+
 	float m_vPosition[3];
+	float m_scale;
 };
 

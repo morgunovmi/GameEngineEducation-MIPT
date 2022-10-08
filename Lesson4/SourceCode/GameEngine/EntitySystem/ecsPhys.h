@@ -6,6 +6,11 @@ struct Position
 	float x, y, z;
 };
 
+struct Scale
+{
+	float s;
+};
+
 struct Velocity
 {
 	float x, y, z;

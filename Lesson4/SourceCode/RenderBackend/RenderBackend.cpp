@@ -56,12 +56,11 @@ void RenderBackend::Draw(IRenderData* renderObject)
 	assert(renderObject);
 
 	float mtx[16];
-	bx::mtxRotateXYZ(mtx, 0, 0, 0);
-
-	float translate[3] = {0.0f, 0.0f, 0.0f};
+	const auto scale = renderObject->GetScale();
+	float translate[3] = { 0.0f, 0.0f, 0.0f };
 	renderObject->GetPosition(translate);
 
-	bx::mtxTranslate(mtx, translate[0], translate[1], translate[2]);
+	bx::mtxSRT(mtx, scale, scale, scale, 0, 0, 0, translate[0], translate[1], translate[2]);
 	bgfx::setTransform(mtx);
 
 	BgfxRenderData* renderData = reinterpret_cast<BgfxRenderData*>(renderObject);

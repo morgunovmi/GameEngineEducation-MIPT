@@ -24,14 +24,15 @@ void register_ecs_mesh_systems(flecs::world &ecs)
           position[2] = 0.0f;
 
           renderProxy->SetPosition(position);
+          renderProxy->SetScale(1.0f);
 
           e.set(RenderProxyPtr{ renderProxy });
           e.remove<CubeMesh>();
       });
     });
 
-  ecs.system<RenderProxyPtr, const Position>()
-    .each([&](RenderProxyPtr &renderProxy, const Position &pos)
+  ecs.system<RenderProxyPtr, const Position, const Scale>()
+    .each([&](RenderProxyPtr &renderProxy, const Position &pos, const Scale &scale)
     {
       renderQuery.each([&](RenderEnginePtr re)
       {
@@ -41,6 +42,7 @@ void register_ecs_mesh_systems(flecs::world &ecs)
            position[2] = pos.z;
 
            renderProxy.ptr->SetPosition(position);
+           renderProxy.ptr->SetScale(scale.s);
       });
     });
 }

@@ -94,6 +94,7 @@ void RenderEngine::Update()
 		renderObject->GetPosition(position);
 		IRenderData* renderData = renderObject->GetRenderData();
 		renderData->SetPosition(position);
+		renderData->SetScale(renderObject->GetScale());
 
 		m_pRenderBackend->Draw(renderData);
 	}
