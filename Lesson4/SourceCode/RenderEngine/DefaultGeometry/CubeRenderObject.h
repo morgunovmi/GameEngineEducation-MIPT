@@ -1,17 +1,7 @@
 #pragma once
 
 #include "../RenderObject.h"
-
-namespace
-{
-	struct PosColorVertex
-	{
-		float x;
-		float y;
-		float z;
-		uint32_t abgr;
-	};
-};
+#include "../PosColorVertex.h"
 
 class RENDERENGINE_API CubeRenderObject final : public RenderObject
 {

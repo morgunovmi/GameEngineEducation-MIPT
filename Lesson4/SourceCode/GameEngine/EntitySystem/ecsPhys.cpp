@@ -11,6 +11,7 @@ void register_ecs_phys_systems(flecs::world &ecs)
   ecs.system<Velocity, const Gravity, BouncePlane*, Position*>()
     .each([&](flecs::entity e, Velocity &vel, const Gravity &grav, BouncePlane *plane, Position *pos)
     {
+            /// Why ptrs????
       if (plane && pos)
       {
         constexpr float planeEpsilon = 0.1f;

@@ -20,6 +20,7 @@ class RenderEngine;
 enum ERenderCommand : UINT32
 {
 	RC_CreateCubeRenderObject = 0,
+	RC_CreateOctahedronRenderObject = 1,
 };
 
 class RENDERENGINE_API RenderThread

@@ -5,6 +5,7 @@
 #include "RenderThread.h"
 #include "RenderEngine.h"
 #include "CubeRenderProxy.h"
+#include "OctahedronRenderProxy.h"
 
 void register_ecs_mesh_systems(flecs::world &ecs)
 {
@@ -14,8 +15,8 @@ void register_ecs_mesh_systems(flecs::world &ecs)
     {
       renderQuery.each([&](RenderEnginePtr re)
       {
-          RenderProxy* renderProxy = new CubeRenderProxy;
-          re.ptr->GetRT()->EnqueueCommand(RC_CreateCubeRenderObject, renderProxy);
+          RenderProxy* renderProxy = new OctahedronRenderProxy;
+          re.ptr->GetRT()->EnqueueCommand(RC_CreateOctahedronRenderObject, renderProxy);
 
           float position[3];
           position[0] = 0.0f;

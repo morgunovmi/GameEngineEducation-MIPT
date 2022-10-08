@@ -115,6 +115,20 @@ void RenderEngine::CreateCubeRenderObject(RenderProxy* renderProxy)
 	m_renderObjects.emplace_back(renderObject);
 }
 
+void RenderEngine::CreateOctahedronRenderObject(RenderProxy* renderProxy)
+{
+	RenderObject* renderObject = new OctahedronRenderObject(renderProxy);
+
+	IRenderData* renderData = m_pRenderBackend->CreateRenderObject(
+		renderObject->GetVertices(), renderObject->GetVerticesSize(),
+		renderObject->GetIndices(), renderObject->GetIndicesSize(),
+		renderObject->GetVsShaderName(), renderObject->GetPsShaderName()
+	);
+
+	renderObject->SetRenderData(renderData);
+	m_renderObjects.emplace_back(renderObject);
+}
+
 RenderThread* const RenderEngine::GetRT()
 {
 	return m_pRT;

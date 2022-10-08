@@ -6,13 +6,14 @@
 #include <crtdbg.h>
 #endif
 
+#include <memory>
+
 #include "GameEngine.h"
 #include "RenderEngine.h"
 #include "RenderThread.h"
 #include "GameTimer.h"
 #include "InputHandler.h"
 #include "EntitySystem/EntitySystem.h"
-
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -26,11 +27,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameTimer timer;
 
-    RenderEngine* renderEngine = new RenderEngine(hInstance);
-    RenderThread* renderThread = renderEngine->GetRT();
-    InputHandler* inputHandler = new InputHandler();
+    auto renderEngine = std::make_unique<RenderEngine>(hInstance);
+    auto renderThread = renderEngine->GetRT();
+    auto inputHandler = std::make_unique<InputHandler>();
 
-    EntitySystem* entitySystem = new EntitySystem(renderEngine, inputHandler);
+    auto entitySystem = std::make_unique<EntitySystem>(renderEngine.get(), inputHandler.get());
 
     MSG msg = { 0 };
 

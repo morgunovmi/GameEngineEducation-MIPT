@@ -222,6 +222,9 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="CubeRenderProxy.h" />
     <ClInclude Include="DefaultGeometry\CubeRenderObject.h" />
+    <ClInclude Include="DefaultGeometry\OctahedronRenderObject.h" />
+    <ClInclude Include="OctahedronRenderProxy.h" />
+    <ClInclude Include="PosColorVertex.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="RenderEngine.h" />
     <ClInclude Include="RenderObject.h" />
@@ -231,6 +234,8 @@
   <ItemGroup>
     <ClCompile Include="CubeRenderProxy.cpp" />
     <ClCompile Include="DefaultGeometry\CubeRenderObject.cpp" />
+    <ClCompile Include="DefaultGeometry\OctahedronRenderObject.cpp" />
+    <ClCompile Include="OctahedronRenderProxy.cpp" />
     <ClCompile Include="RenderEngine.cpp" />
     <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="RenderProxy.cpp" />
