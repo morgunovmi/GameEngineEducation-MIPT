@@ -1,12 +1,12 @@
 #pragma once
 
-#include <flecs.h>
+#include "flecs.h"
 
 struct Placeholder{ };
 
 struct Gun
 {
-	flecs::entity bullet; uint16_t num_rounds;
+	flecs::entity bullet; uint16_t numRounds; uint16_t capacity;
 };
 
 struct Bullet { };

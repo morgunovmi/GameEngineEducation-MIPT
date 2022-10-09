@@ -3,6 +3,7 @@
 #include "ecsPhys.h"
 #include "ecsGun.h"
 #include "ecsMesh.h"
+#include "ecsTimers.h"
 #include "flecs.h"
 #include "../InputHandler.h"
 
@@ -41,12 +42,13 @@ void register_ecs_control_systems(flecs::world& ecs)
 					});
 			});
 
-	ecs.system<const Position, const Velocity, const Gun>()
-		.each([&](flecs::entity e, const Position& pos, const Velocity& vel, const Gun& gun)
+	static bool shot_happened = false;
+	ecs.system<const Position, const Velocity, Gun>()
+		.each([&](flecs::entity e, const Position& pos, const Velocity& vel, Gun& gun)
 			{
-				inputQuery.each([&](InputHandlerPtr input)
+				inputQuery.each([&](flecs::entity inputEntity, InputHandlerPtr input)
 					{
-						if (input.ptr->GetInputState().test(eIC_Fire))
+						if (input.ptr->GetInputState().test(eIC_Fire) && !shot_happened && gun.numRounds > 0)
 						{
 							bool spawned = false;
 							placeholderQuery.each([&](flecs::entity placeholder, Placeholder&)
@@ -63,6 +65,16 @@ void register_ecs_control_systems(flecs::world& ecs)
 										spawned = true;
 									}
 								});
+							shot_happened = true;
+							--gun.numRounds;
+							if (gun.numRounds == 0)
+							{
+								e.set(ReloadTimer{5, 0});
+							}
+						}
+						else
+						{
+							shot_happened = false;
 						}
 					});
 			});
