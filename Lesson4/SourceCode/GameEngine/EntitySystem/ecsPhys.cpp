@@ -1,4 +1,6 @@
 #include "ecsPhys.h"
+#include "ecsGun.h"
+#include "ecsTimers.h"
 #include <stdlib.h>
 
 static float rand_flt(float from, float to)
@@ -21,6 +23,22 @@ void register_ecs_phys_systems(flecs::world &ecs)
       vel.y += grav.y * e.delta_time();
       vel.z += grav.z * e.delta_time();
     });
+
+  ecs.system<const Bullet, const Position, DeathPlane*>()
+      .each([&](flecs::entity e, const Bullet&, const Position& pos, DeathPlane* plane)
+          {
+              if (plane)
+              {
+                  constexpr float planeEpsilon = 0.1f;
+                  if (plane->x * pos.x + plane->y * pos.y + plane->z * pos.z < plane->w + planeEpsilon)
+                  {
+                      if (!e.has<SelfDestroyTimer>())
+                      {
+                          e.set(SelfDestroyTimer{ 5, 0 });
+                      }
+                  }
+              }
+          });
 
 
   ecs.system<Velocity, Position, const BouncePlane, const Bounciness>()

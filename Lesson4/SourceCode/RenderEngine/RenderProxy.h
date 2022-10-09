@@ -21,7 +21,11 @@ public:
 	}
 	void SetScale(float scale) { m_scale = scale; }
 
+	bool IsRendered() const { return m_isRendered; }
+	void SetRendered(bool isRendered) { m_isRendered = isRendered; }
+
 	float m_vPosition[3];
 	float m_scale;
+	bool m_isRendered;
 };
 

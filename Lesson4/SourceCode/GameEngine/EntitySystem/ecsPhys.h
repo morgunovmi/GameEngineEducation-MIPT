@@ -26,6 +26,11 @@ struct BouncePlane
   float x,y,z,w;
 };
 
+struct DeathPlane
+{
+	float x, y, z, w;
+};
+
 struct Bounciness
 {
   float val;

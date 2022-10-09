@@ -88,15 +88,24 @@ void RenderEngine::Update()
 {
 	m_pRenderBackend->SetViewTransform();
 
-	for (auto* renderObject : m_renderObjects)
+	for (auto it = m_renderObjects.begin(); it != m_renderObjects.end();)
 	{
-		float position[3];
-		renderObject->GetPosition(position);
-		IRenderData* renderData = renderObject->GetRenderData();
-		renderData->SetPosition(position);
-		renderData->SetScale(renderObject->GetScale());
+		auto* renderObject = *it;
+		if (!renderObject->IsRendered())
+		{
+			it = m_renderObjects.erase(it);
+		}
+		else
+		{
+			float position[3];
+			renderObject->GetPosition(position);
+			IRenderData* renderData = renderObject->GetRenderData();
+			renderData->SetPosition(position);
+			renderData->SetScale(renderObject->GetScale());
 
-		m_pRenderBackend->Draw(renderData);
+			m_pRenderBackend->Draw(renderData);
+			++it;
+		}
 	}
 
 	m_pRenderBackend->DrawFrame();
