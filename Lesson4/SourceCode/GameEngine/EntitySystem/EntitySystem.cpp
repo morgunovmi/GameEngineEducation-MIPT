@@ -35,7 +35,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		.set(Gravity{ 0.f, -9.8065f, 0.f })
 		.set(BouncePlane{ 0.f, 1.f, 0.f, 0.f })
 		.set(Bounciness{ 0.3f })
-		.set(Gun{ bullet, 6, 6, 20.f })
+		.set(Gun{ bullet, 2.f, 6, 6, 20.f })
 		.add<Controllable>()
 		.add<CubeMesh>();
 

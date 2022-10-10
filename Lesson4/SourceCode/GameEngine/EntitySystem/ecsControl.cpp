@@ -69,7 +69,7 @@ void register_ecs_control_systems(flecs::world& ecs)
 							--gun.numRounds;
 							if (gun.numRounds == 0)
 							{
-								e.set(ReloadTimer{5, 0});
+								e.set(ReloadTimer{gun.reloadTime, 0});
 							}
 						}
 						else
