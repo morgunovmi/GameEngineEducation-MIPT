@@ -46,6 +46,13 @@ struct FrictionAmount
   float val;
 };
 
+struct BoundingBox
+{
+	float x;
+	float y;
+	float z;
+};
+
 typedef float Speed;
 
 void register_ecs_phys_systems(flecs::world &ecs);

@@ -13,5 +13,6 @@ public:
 	void Update();
 private:
 	flecs::world ecs;
+	uint16_t m_maxPlaceholders = 50;
 };
 

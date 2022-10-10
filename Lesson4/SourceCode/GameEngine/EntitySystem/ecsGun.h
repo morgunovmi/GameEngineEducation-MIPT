@@ -2,7 +2,7 @@
 
 #include "flecs.h"
 
-struct Placeholder{ };
+struct Placeholder { };
 
 struct Gun
 {
@@ -10,3 +10,5 @@ struct Gun
 };
 
 struct Bullet { };
+
+struct Target { uint16_t bonus; };

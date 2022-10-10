@@ -17,6 +17,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		.set(Position{ 0, 0, -100.f })
 		.set(Velocity{ 0, 0, 0 })
 		.set(Scale{ 0.5f })
+		.set(BoundingBox{ 0.3, 0.3, 0.3 })
 		.set(BouncePlane{ 0.f, 1.f, 0.f, -3.f })
 		.set(DeathPlane{ 0.f, 1.f, 0.f, -3.f })
 		.set(Bounciness{ 0.3f })
@@ -24,7 +25,24 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		.set(FrictionAmount{ 0.2f })
 		.add<Bullet>();
 
-	for (std::size_t i = 0; i < 12; ++i)
+	auto target = ecs.prefab()
+		.set(Position{ 0, 0, 0 })
+		.set(Velocity{ 0, 0, 0 })
+		.set(Scale{ 0.5f })
+		.set(BouncePlane{ 0.f, 1.f, 0.f, -3.f })
+		.set(Bounciness{ 0.5f })
+		.set(BoundingBox{ 0.5f, 0.5f, 0.5f })
+		.set(Target{ 2 });
+
+	for (float x = -5.f; x <= 5.f; x += 5)
+	{
+		ecs.entity()
+			.is_a(target)
+			.add<CubeMesh>()
+			.set(Position{ x, 0, 5 });
+	}
+
+	for (std::size_t i = 0; i < m_maxPlaceholders; ++i)
 	{
 		ecs.entity().add<Placeholder>();
 	}
@@ -51,5 +69,12 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 
 void EntitySystem::Update()
 {
+	static auto placeholderQuery = ecs.query<Placeholder>();
     ecs.progress();
+	uint16_t count = 0;
+	placeholderQuery.each([&](Placeholder&) { ++count; });
+	for (uint16_t i = count; i < m_maxPlaceholders; ++i)
+	{
+		ecs.entity().add<Placeholder>();
+	}
 }

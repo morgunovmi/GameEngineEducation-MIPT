@@ -1,11 +1,22 @@
 #include "ecsPhys.h"
 #include "ecsGun.h"
+#include "ecsMesh.h"
+#include "RenderProxy.h"
+
 #include "ecsTimers.h"
-#include <stdlib.h>
+#include <cstdlib>
+#include <cmath>
 
 static float rand_flt(float from, float to)
 {
   return from + (float(rand()) / RAND_MAX) * (to - from);
+}
+
+static bool box_intersection(const Position& pos, const BoundingBox& bbox, const Position& rhsPos, const BoundingBox& rhsBbox)
+{
+	return (std::abs(pos.x - rhsPos.x) < (bbox.x + rhsBbox.x)) 
+        && (std::abs(pos.y - rhsPos.y) < (bbox.y + rhsBbox.y))
+		&& (std::abs(pos.z - rhsPos.z) < (bbox.z + rhsBbox.z));
 }
 
 void register_ecs_phys_systems(flecs::world &ecs)
@@ -38,6 +49,22 @@ void register_ecs_phys_systems(flecs::world &ecs)
                       }
                   }
               }
+          });
+
+  static auto targetQuery = ecs.query<const Target, const Position, const BoundingBox, RenderProxyPtr*>();
+  static auto gunQuery = ecs.query<Gun>();
+  ecs.system<const Position, const Bullet, const BoundingBox, RenderProxyPtr*>()
+      .each([&](flecs::entity e, const Position& pos, const Bullet, const BoundingBox& bbox, RenderProxyPtr* ptr)
+          {
+              targetQuery.each([&](flecs::entity t, const Target& target, const Position& targetPos, const BoundingBox& targetBbox, RenderProxyPtr* targetPtr)
+                  {
+                      if (box_intersection(pos, bbox, targetPos, targetBbox))
+                      {
+                          gunQuery.each([&](Gun& gun) { gun.numRounds += min(target.bonus, gun.capacity - gun.numRounds); });
+                          targetPtr->ptr->SetRendered(false);
+                          //t.mut(e).destruct();
+                      }
+                  });
           });
 
 
