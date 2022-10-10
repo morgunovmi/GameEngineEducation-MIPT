@@ -53,8 +53,8 @@ void register_ecs_phys_systems(flecs::world &ecs)
 
   static auto targetQuery = ecs.query<const Target, const Position, const BoundingBox, RenderProxyPtr*>();
   static auto gunQuery = ecs.query<Gun>();
-  ecs.system<const Position, const Bullet, const BoundingBox, RenderProxyPtr*>()
-      .each([&](flecs::entity e, const Position& pos, const Bullet, const BoundingBox& bbox, RenderProxyPtr* ptr)
+  ecs.system<const Position, Bullet, const BoundingBox, RenderProxyPtr*>()
+      .each([&](flecs::entity e, const Position& pos, Bullet&, const BoundingBox& bbox, RenderProxyPtr* ptr)
           {
               targetQuery.each([&](flecs::entity t, const Target& target, const Position& targetPos, const BoundingBox& targetBbox, RenderProxyPtr* targetPtr)
                   {
@@ -62,7 +62,7 @@ void register_ecs_phys_systems(flecs::world &ecs)
                       {
                           gunQuery.each([&](Gun& gun) { gun.numRounds += min(target.bonus, gun.capacity - gun.numRounds); });
                           targetPtr->ptr->SetRendered(false);
-                          //t.mut(e).destruct();
+                          t.mut(e).destruct();
                       }
                   });
           });

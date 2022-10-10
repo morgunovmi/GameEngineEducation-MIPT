@@ -57,7 +57,7 @@ void register_ecs_control_systems(flecs::world& ecs)
 									{
 										placeholder.mut(e)
 											.is_a(gun.bullet)
-											.set(Velocity{ vel.x, vel.y, vel.z + 30.f })
+											.set(Velocity{ vel.x, vel.y, vel.z + gun.muzzleSpeed })
 											.set(Position{ pos.x, pos.y, pos.z })
 											.add<OctaMesh>()
 											.remove<Placeholder>();

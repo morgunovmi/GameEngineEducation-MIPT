@@ -6,7 +6,7 @@ struct Placeholder { };
 
 struct Gun
 {
-	flecs::entity bullet; uint16_t numRounds; uint16_t capacity;
+	flecs::entity bullet; uint16_t numRounds; uint16_t capacity; float muzzleSpeed;
 };
 
 struct Bullet { };
