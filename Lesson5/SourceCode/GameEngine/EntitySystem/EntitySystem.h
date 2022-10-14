@@ -2,13 +2,14 @@
 
 #include "flecs.h"
 #include "RenderEngine.h"
+#include "../ScriptSystem/ScriptSystem.h"
 #include "../InputHandler.h"
 
 class EntitySystem
 {
 public:
 	EntitySystem() = delete;
-	EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler);
+	EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler, CScriptSystem* scriptSystem);
 
 	void Update();
 private:

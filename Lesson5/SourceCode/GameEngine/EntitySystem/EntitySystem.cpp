@@ -3,13 +3,16 @@
 #include "ecsMesh.h"
 #include "ecsControl.h"
 #include "ecsPhys.h"
+#include "ecsScript.h"
 
-EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler)
+EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler, CScriptSystem* scriptSystem)
 {
     ecs.entity("inputHandler")
         .set(InputHandlerPtr{ inputHandler });
     ecs.entity("renderEngine")
         .set(RenderEnginePtr{ renderEngine });
+    ecs.entity("scriptSystem")
+        .set(ScriptSystemPtr{ scriptSystem });
 
     register_ecs_mesh_systems(ecs);
     register_ecs_control_systems(ecs);
@@ -24,7 +27,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
         .set(Gravity{ 0.f, -9.8065f, 0.f })
         .set(BouncePlane{ 0.f, 1.f, 0.f, 0.f })
         .set(Bounciness{ 0.3f })
-        .add<Controllable>()
+        .set(ScriptProxy{ "file.txt" })
         .add<CubeMesh>();
 
     auto cubeMoving = ecs.entity()

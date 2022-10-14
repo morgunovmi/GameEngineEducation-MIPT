@@ -27,12 +27,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GameTimer timer;
 
-    RenderEngine* renderEngine = new RenderEngine(hInstance);
-    RenderThread* renderThread = renderEngine->GetRT();
-    InputHandler* inputHandler = new InputHandler();
-    CScriptSystem* scriptSystem = new CScriptSystem();
+    auto renderEngine = std::make_unique<RenderEngine>(hInstance);
+    auto* renderThread = renderEngine->GetRT();
+    auto inputHandler = std::make_unique<InputHandler>();
+    auto scriptSystem = std::make_unique<CScriptSystem>();
 
-    EntitySystem* entitySystem = new EntitySystem(renderEngine, inputHandler);
+    EntitySystem* entitySystem = new EntitySystem(renderEngine.get(),
+                                                  inputHandler.get(),
+                                                  scriptSystem.get());
 
     MSG msg = { 0 };
 
