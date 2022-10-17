@@ -3,6 +3,7 @@
 #include "ecsPhys.h"
 #include "ecsGun.h"
 #include "ecsMesh.h"
+#include "ecsTimers.h"
 #include "../ScriptSystem/ScriptSystem.h"
 #include "../ScriptSystem/ScriptProxy.h"
 #include "../GameEngine/InputHandler.h"
@@ -76,7 +77,8 @@ void register_ecs_script_systems(flecs::world& ecs)
 									"GetBouncePlane", [](flecs::entity e) { return e.get<BouncePlane>(); },
 									"GetGun", [](flecs::entity e) { return e.get<Gun>(); },
 									"IsA", [](flecs::entity e, flecs::entity p) { e.is_a(p); },
-									"AddOctaMesh", [](flecs::entity e) { e.add<OctaMesh>(); }
+									"AddOctaMesh", [](flecs::entity e) { e.add<OctaMesh>(); },
+									"AddReloadTimer", [](flecs::entity e, float time) { e.set(ReloadTimer{ time, 0.0f }); }
 								);
 
 								lua.new_usertype<Gun>(

@@ -12,4 +12,8 @@ if inputState:Test(InputCommand.Fire) and gun.numRounds > 0 then
     b:AddOctaMesh()
 
     gun.numRounds = gun.numRounds - 1
+
+    if gun.numRounds == 0 then
+        entity:AddReloadTimer(2.0)
+    end
 end
