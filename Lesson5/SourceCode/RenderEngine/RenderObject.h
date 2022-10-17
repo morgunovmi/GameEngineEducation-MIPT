@@ -20,6 +20,8 @@ public:
 	virtual std::string GetPsShaderName() const = 0;
 
 	void GetPosition(float* result) { m_pRenderProxy->GetPosition(result); }
+	float GetScale() { return m_pRenderProxy->GetScale(); }
+	bool IsRendered() const { return m_pRenderProxy->IsRendered(); }
 	IRenderData* GetRenderData() const { return m_pRenderData; }
 	void SetRenderData(IRenderData* renderData) { m_pRenderData = renderData; }
 

@@ -39,6 +39,15 @@
     <ClInclude Include="CubeRenderProxy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OctahedronRenderProxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PosColorVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultGeometry\OctahedronRenderObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RenderEngine.cpp">
@@ -57,6 +66,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CubeRenderProxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OctahedronRenderProxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultGeometry\OctahedronRenderObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

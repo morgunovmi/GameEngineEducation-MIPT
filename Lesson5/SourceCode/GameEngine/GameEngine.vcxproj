@@ -173,10 +173,12 @@
   <ItemGroup>
     <ClInclude Include="..\Util\Log.h" />
     <ClInclude Include="EntitySystem\ecsControl.h" />
+    <ClInclude Include="EntitySystem\ecsGun.h" />
     <ClInclude Include="EntitySystem\ecsMesh.h" />
     <ClInclude Include="EntitySystem\ecsPhys.h" />
     <ClInclude Include="EntitySystem\ecsScript.h" />
     <ClInclude Include="EntitySystem\ecsSystems.h" />
+    <ClInclude Include="EntitySystem\ecsTimers.h" />
     <ClInclude Include="EntitySystem\EntitySystem.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObject.h" />
@@ -189,6 +191,7 @@
     <ClCompile Include="EntitySystem\ecsMesh.cpp" />
     <ClCompile Include="EntitySystem\ecsPhys.cpp" />
     <ClCompile Include="EntitySystem\ecsScript.cpp" />
+    <ClCompile Include="EntitySystem\ecsTimers.cpp" />
     <ClCompile Include="EntitySystem\EntitySystem.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObject.cpp" />

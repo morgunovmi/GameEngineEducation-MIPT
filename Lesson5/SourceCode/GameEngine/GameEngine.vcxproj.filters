@@ -51,6 +51,12 @@
     <ClInclude Include="..\Util\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EntitySystem\ecsGun.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntitySystem\ecsTimers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp">
@@ -78,6 +84,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EntitySystem\ecsScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitySystem\ecsTimers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

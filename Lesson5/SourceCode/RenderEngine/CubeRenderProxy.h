@@ -7,4 +7,3 @@ class CubeRenderProxy final : public RenderProxy
 public:
 	CubeRenderProxy() = default;
 };
-
