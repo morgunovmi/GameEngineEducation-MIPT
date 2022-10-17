@@ -1,16 +1,12 @@
 #pragma once
 
 #include "flecs.h"
+#include <vector>
 #include <string_view>
 
-struct ScriptProxy
+struct ScriptProxies
 {
-	std::string_view script_file;
-};
-
-struct ScriptProxyPtr
-{
-	class IScriptProxy* ptr;
+	std::vector<std::string> script_files;
 };
 
 void register_ecs_script_systems(flecs::world& ecs);

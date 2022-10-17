@@ -20,7 +20,4 @@ void CScriptProxy::Update(float dt)
 		sol::error err = res;
 		LogError("Couldn't run update: %s", err.what());
 	}
-	else {
-		LogZA("Updating with dt = %f\n", dt);
-	}
 }
