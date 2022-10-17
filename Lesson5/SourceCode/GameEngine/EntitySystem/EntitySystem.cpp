@@ -20,7 +20,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		.set(Position{ 0, 0, -100.f })
 		.set(Velocity{ 0, 0, 0 })
 		.set(Scale{ 0.5f })
-		.set(BoundingBox{ 0.3, 0.3, 0.3 })
+		.set(BoundingBox{ 0.3f, 0.3f, 0.3f })
 		.set(BouncePlane{ 0.f, 1.f, 0.f, -3.f })
 		.set(DeathPlane{ 0.f, 1.f, 0.f, -3.f })
 		.set(Bounciness{ 0.3f })
