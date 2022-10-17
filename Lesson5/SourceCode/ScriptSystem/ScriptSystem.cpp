@@ -1,19 +1,19 @@
 #include "ScriptSystem.h"
+#include "ScriptProxy.h"
 
 CScriptSystem::CScriptSystem()
 {
     return;
 }
 
-void CScriptSystem::Update()
+void CScriptSystem::Update(float dt)
 {
+    for (auto& s : m_scripts) {
+        s->Update(dt);
+    }
 }
 
-IScriptProxy* CScriptSystem::CreateProxy(const char* filename)
+std::shared_ptr<CScriptProxy> CScriptSystem::CreateProxy(const char* filename)
 {
-    return nullptr;
-}
-
-void CScriptSystem::ProcessScript(IScriptProxy* scriptProxy)
-{
+    return m_scripts.emplace_back(std::make_shared<CScriptProxy>(filename));
 }

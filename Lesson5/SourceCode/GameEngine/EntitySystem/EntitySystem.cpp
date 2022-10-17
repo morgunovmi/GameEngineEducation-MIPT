@@ -28,7 +28,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
         .set(Gravity{ 0.f, -9.8065f, 0.f })
         .set(BouncePlane{ 0.f, 1.f, 0.f, 0.f })
         .set(Bounciness{ 0.3f })
-        .set(ScriptProxy{ "controllable.txt" })
+        .set(ScriptProxy{ "../../../Assets/scripts/meme.lua" })
         .add<CubeMesh>();
 
     auto cubeMoving = ecs.entity()

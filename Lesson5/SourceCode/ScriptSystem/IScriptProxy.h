@@ -3,5 +3,6 @@
 
 class SCRIPTSYSTEM_API IScriptProxy
 {
-
+public:
+	virtual void Update(float dt) = 0;
 };

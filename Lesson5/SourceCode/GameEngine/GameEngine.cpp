@@ -51,7 +51,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             inputHandler->Update();
-            scriptSystem->Update();
+            scriptSystem->Update(timer.DeltaTime());
             entitySystem->Update();
 
             timer.Tick();
