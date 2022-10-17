@@ -187,7 +187,6 @@
     <ClInclude Include="InputHandler.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EntitySystem\ecsControl.cpp" />
     <ClCompile Include="EntitySystem\ecsMesh.cpp" />
     <ClCompile Include="EntitySystem\ecsPhys.cpp" />
     <ClCompile Include="EntitySystem\ecsScript.cpp" />

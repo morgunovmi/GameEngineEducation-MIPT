@@ -71,9 +71,6 @@
     <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EntitySystem\ecsControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EntitySystem\ecsMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

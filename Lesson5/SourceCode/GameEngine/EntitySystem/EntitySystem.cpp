@@ -9,7 +9,6 @@
 
 EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler, CScriptSystem* scriptSystem)
 {
-	using namespace std::literals;
 	ecs.entity("inputHandler")
 		.set(InputHandlerPtr{ inputHandler });
 	ecs.entity("renderEngine")
@@ -62,13 +61,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		}
 	}
 
-	for (std::size_t i = 0; i < m_maxPlaceholders; ++i)
-	{
-		ecs.entity().add<Placeholder>();
-	}
-
 	register_ecs_mesh_systems(ecs);
-	register_ecs_control_systems(ecs);
 	register_ecs_phys_systems(ecs);
 	register_ecs_timer_systems(ecs);
 	register_ecs_script_systems(ecs);
@@ -76,12 +69,5 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 
 void EntitySystem::Update()
 {
-	static auto placeholderQuery = ecs.query<Placeholder>();
 	ecs.progress();
-	uint16_t count = 0;
-	placeholderQuery.each([&](Placeholder&) { ++count; });
-	for (uint16_t i = count; i < m_maxPlaceholders; ++i)
-	{
-		ecs.entity().add<Placeholder>();
-	}
 }
