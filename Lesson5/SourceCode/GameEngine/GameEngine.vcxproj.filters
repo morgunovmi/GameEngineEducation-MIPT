@@ -30,9 +30,6 @@
     <ClInclude Include="Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntitySystem\ecsControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EntitySystem\ecsMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>

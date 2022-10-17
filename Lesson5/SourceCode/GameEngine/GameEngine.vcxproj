@@ -172,7 +172,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Util\Log.h" />
-    <ClInclude Include="EntitySystem\ecsControl.h" />
     <ClInclude Include="EntitySystem\ecsGun.h" />
     <ClInclude Include="EntitySystem\ecsMesh.h" />
     <ClInclude Include="EntitySystem\ecsPhys.h" />
