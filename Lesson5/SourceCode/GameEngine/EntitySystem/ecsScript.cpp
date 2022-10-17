@@ -1,6 +1,8 @@
 #include "ecsScript.h"
 #include "ecsSystems.h"
 #include "ecsPhys.h"
+#include "ecsGun.h"
+#include "ecsMesh.h"
 #include "../ScriptSystem/ScriptSystem.h"
 #include "../ScriptSystem/ScriptProxy.h"
 #include "../GameEngine/InputHandler.h"
@@ -58,7 +60,8 @@ void register_ecs_script_systems(flecs::world& ecs)
 									"GoRight", eIC_GoRight,
 									"GoForward", eIC_GoForward,
 									"GoBack", eIC_GoBack,
-									"Jump", eIC_Jump
+									"Jump", eIC_Jump,
+									"Fire", eIC_Fire
 								);
 								lua.new_usertype<InputHandler>(
 									"InputHandler",
@@ -70,7 +73,19 @@ void register_ecs_script_systems(flecs::world& ecs)
 									"SetPosition", [](flecs::entity e, float x, float y, float z) { e.set(Position{ x, y, z }); },
 									"GetVelocity", [](flecs::entity e) { return e.get<Velocity>(); },
 									"SetVelocity", [](flecs::entity e, float x, float y, float z) { e.set(Velocity{ x, y, z }); },
-									"GetBouncePlane", [](flecs::entity e) { return e.get<BouncePlane>(); }
+									"GetBouncePlane", [](flecs::entity e) { return e.get<BouncePlane>(); },
+									"GetGun", [](flecs::entity e) { return e.get<Gun>(); },
+									"IsA", [](flecs::entity e, flecs::entity p) { e.is_a(p); },
+									"AddOctaMesh", [](flecs::entity e) { e.add<OctaMesh>(); }
+								);
+
+								lua.new_usertype<Gun>(
+									"Gun",
+									"bullet", &Gun::bullet,
+									"reloadTime", &Gun::reloadTime,
+									"numRounds", &Gun::numRounds,
+									"capacity", &Gun::capacity,
+									"muzzleSpeed", &Gun::muzzleSpeed
 								);
 
 								lua["entityId"] = e.id();

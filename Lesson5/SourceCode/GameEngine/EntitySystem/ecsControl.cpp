@@ -20,7 +20,7 @@ void register_ecs_control_systems(flecs::world& ecs)
 					{
 						if (input.ptr->GetInputState().test(eIC_Fire) && !shot_happened && gun.numRounds > 0)
 						{
-							bool spawned = false;
+						/*	bool spawned = false;
 							placeholderQuery.each([&](flecs::entity placeholder, Placeholder&)
 								{
 									if (!spawned)
@@ -40,7 +40,7 @@ void register_ecs_control_systems(flecs::world& ecs)
 							if (gun.numRounds == 0)
 							{
 								e.set(ReloadTimer{ gun.reloadTime, 0 });
-							}
+							}*/
 						}
 						else
 						{
