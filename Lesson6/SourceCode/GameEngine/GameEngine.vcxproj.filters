@@ -89,7 +89,7 @@
     <ClCompile Include="WorldLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SDKs\tinyxml2\tinyxml2.cpp">
+    <ClCompile Include="..\..\..\SDKs\pugixml\src\pugixml.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

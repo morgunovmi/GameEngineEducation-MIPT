@@ -6,7 +6,7 @@ if inputState:Test(InputCommand.Fire) and gun.numRounds > 0 then
     pos = entity:GetPosition()
 
     b = world:CreateEntity()
-    b:IsA(gun.bullet)
+    b:IsA(world:GetEntityByName(gun.bullet))
     b:SetPosition(pos.x, pos.y, pos.z)
     b:SetVelocity(0.0, 0.0, gun.muzzleSpeed)
     b:AddOctaMesh()

@@ -1,7 +1,9 @@
 <entities>
     <entity name="jeff">
-        <transform position="0.0,0.0,0.0"/>
-        <physics bounce_plane="0.0,0.0,0.0,0.0" gravity="0.0,-9.8,0.0"/>
+        <transform position="0.0,0.0,0.0" scale="1.0"/>
+        <physics velocity="0.0,0.0,0.0" bounce_plane="0.0,0.0,0.0,0.0" bounciness="0.3" gravity="0.0,-9.8,0.0" friction_amount="0.95"/>
+        <gun ammo="bullet" reload_time="2.0" num_rounds="0" capacity="6" muzzle_speed="20.0"/>
+        <cube_mesh/>
         <scripts filename="move.lua,shoot.lua"/>
     </entity>
 </entities>

@@ -1,15 +1,15 @@
 #include "WorldLoader.h"
 
-#include "Log.h"
+#include <cassert>
 
-tinyxml2::XMLDocument WorldLoader::LoadXML(std::string_view path)
+std::shared_ptr<pugi::xml_document> WorldLoader::LoadXML(std::string_view path)
 {
-	tinyxml2::XMLDocument doc{};
-	doc.LoadFile(path.data());
-	tinyxml2::XMLPrinter printer;
-	doc.Print(&printer);
-	// printer.CStr()
-	LogZA("%s\n", printer.CStr());
+	auto doc = std::make_shared<pugi::xml_document>();
+	pugi::xml_parse_result result = doc->load_file(path.data());
+	if (!result)
+	{
+		assert(0 && "Couldn't parse xml");
+	}
 	
-	return {};
+	return doc;
 }

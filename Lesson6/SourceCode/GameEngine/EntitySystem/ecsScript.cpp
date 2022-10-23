@@ -31,7 +31,8 @@ void register_ecs_script_systems(flecs::world& ecs)
 								lua.new_usertype<flecs::world>(
 									"World",
 									"CreateEntity", [](flecs::world& world) { return world.entity(); },
-									"GetEntity", [](flecs::world& world, flecs::entity_t id) { return world.entity(id); }
+									"GetEntity", [](flecs::world& world, flecs::entity_t id) { return world.entity(id); },
+									"GetEntityByName", [](flecs::world& world, const char* name) { return world.entity(name); }
 								);
 								lua.new_usertype<Position>(
 									"Position",

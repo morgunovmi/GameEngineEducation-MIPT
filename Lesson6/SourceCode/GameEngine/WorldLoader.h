@@ -1,9 +1,10 @@
 #pragma once
 
 #include <string_view>
-#include <tinyxml2.h>
+#include <memory>
+#include <pugixml.hpp>
 
 class WorldLoader {
 public:
-	static tinyxml2::XMLDocument LoadXML(std::string_view path);
+	static std::shared_ptr<pugi::xml_document> LoadXML(std::string_view path);
 };

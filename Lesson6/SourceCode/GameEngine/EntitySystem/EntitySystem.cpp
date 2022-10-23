@@ -7,11 +7,22 @@
 #include "ecsScript.h"
 
 #include "../WorldLoader.h"
+#include "Log.h"
 
 EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler, CScriptSystem* scriptSystem, std::string_view world_path)
 {
+	LogZA("Meme1\n");
 	const auto world = WorldLoader::LoadXML(world_path);
 
+	for (const auto entity : world->child("entities"))
+	{
+		assert(entity && "Corrupt file");
+		
+		LogZA("entity: name: %s, children:\n", entity.attribute("name").as_string());
+		for (const auto component : entity.children()) {
+			LogZA("%s\n", component.name());
+		}
+	}
 
 	ecs.entity("inputHandler")
 		.set(InputHandlerPtr{ inputHandler });
@@ -20,7 +31,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 	ecs.entity("scriptSystem")
 		.set(ScriptSystemPtr{ scriptSystem });
 
-	auto bullet = ecs.prefab()
+	auto bullet = ecs.prefab("bullet")
 		.set(Position{ 0, 0, -100.f })
 		.set(Velocity{ 0, 0, 0 })
 		.set(Scale{ 0.5f })
@@ -40,7 +51,7 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		.set(Gravity{ 0.f, -9.8065f, 0.f })
 		.set(BouncePlane{ 0.f, 1.f, 0.f, 0.f })
 		.set(Bounciness{ 0.3f })
-		.set(Gun{ bullet, 2.f, 6, 6, 20.f })
+		.set(Gun{ "bullet", 2.f, 6, 6, 20.f })
 		.set(ScriptProxies{ {"../../../Assets/scripts/move.lua",
 			"../../../Assets/scripts/shoot.lua"} })
 		.add<CubeMesh>();
