@@ -1,0 +1,7 @@
+<entities>
+    <entity name="jeff">
+        <transform position="0.0,0.0,0.0"/>
+        <physics bounce_plane="0.0,0.0,0.0,0.0" gravity="0.0,-9.8,0.0"/>
+        <scripts filename="move.lua,shoot.lua"/>
+    </entity>
+</entities>
