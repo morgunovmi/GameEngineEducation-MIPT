@@ -14,6 +14,6 @@ if inputState:Test(InputCommand.Fire) and gun.numRounds > 0 then
     gun.numRounds = gun.numRounds - 1
 
     if gun.numRounds == 0 then
-        entity:AddReloadTimer(2.0)
+        entity:AddReloadTimer(gun.reloadTime)
     end
 end

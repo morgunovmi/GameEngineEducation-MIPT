@@ -1,12 +1,13 @@
 #pragma once
 
 #include "flecs.h"
+#include <string>
 
 struct Placeholder { };
 
 struct Gun
 {
-	const char* bullet; float reloadTime; uint16_t numRounds; uint16_t capacity; float muzzleSpeed;
+	std::string bullet; float reloadTime; uint16_t numRounds; uint16_t capacity; float muzzleSpeed;
 };
 
 struct Bullet { };
