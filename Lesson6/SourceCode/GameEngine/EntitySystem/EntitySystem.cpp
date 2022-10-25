@@ -31,19 +31,6 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		.set(FrictionAmount{ 0.2f })
 		.add<Bullet>();
 
-	//auto gun = ecs.entity()
-	//	.set(Position{ 0.f, 0.f, 0.f })
-	//	.set(Scale{ 1.0f })
-	//	.set(Velocity{ 0.f, 0.f, 0.f })
-	//	.set(FrictionAmount{ 0.95f })
-	//	.set(Gravity{ 0.f, -9.8065f, 0.f })
-	//	.set(BouncePlane{ 0.f, 1.f, 0.f, 0.f })
-	//	.set(Bounciness{ 0.3f })
-	//	.set(Gun{ "bullet", 2.f, 6, 6, 20.f })
-	//	.set(ScriptProxies{ {"../../../Assets/scripts/move.lua",
-	//		"../../../Assets/scripts/shoot.lua"} })
-	//	.add<CubeMesh>();
-
 	auto target = ecs.prefab()
 		.set(Position{ 0, 0, 0 })
 		.set(Velocity{ 0, 0, 0 })
