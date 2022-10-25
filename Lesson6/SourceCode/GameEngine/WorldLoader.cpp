@@ -65,9 +65,7 @@ void WorldLoader::ParseEntities(flecs::world& ecs, std::string_view world_path)
 						LogZA("Unexpected component in section %s\n", child.name());
 						continue;
 					}
-					// Add entity component
 					AddComponent(e, component, attr);
-
 				}
 			}
 			else if (componentMap.find(child.name()) != componentMap.end())
@@ -88,10 +86,6 @@ void WorldLoader::AddComponent(flecs::entity e, EntityComponent comp, const pugi
 	switch (comp)
 	{
 	case eGun:
-		LogZA("Adding gun : %s, %f, %d, %d, %f\n", node.attribute("ammo").value(), node.attribute("reload_time").as_float(),
-			static_cast<uint16_t>(node.attribute("num_rounds").as_uint()),
-			static_cast<uint16_t>(node.attribute("capacity").as_uint()),
-			node.attribute("muzzle_speed").as_float());
 		e.set(
 			Gun{
 				node.attribute("ammo").value(),
@@ -103,21 +97,14 @@ void WorldLoader::AddComponent(flecs::entity e, EntityComponent comp, const pugi
 		);
 		break;
 	case eCubeMesh:
-		LogZA("Adding cubemesh");
 		e.add<CubeMesh>();
 		break;
 	case eScripts:
 	{
-		LogZA("Adding scripts\n");
 		auto scripts = Tokenize(node.attribute("filenames").value(), ",");
 		std::transform(scripts.begin(), scripts.end(), scripts.begin(), [](auto str) { return SCRIPT_DIR + str; });
-		for (const auto& scr : scripts) {
-			LogZA("%s\n", scr.c_str());
-		}
 		e.set(
-			ScriptProxies{
-				scripts
-			}
+			ScriptProxies{ scripts }
 		);
 	}
 	break;
@@ -129,43 +116,36 @@ void WorldLoader::AddComponent(flecs::entity e, EntityComponent comp, const pugi
 	switch (comp)
 	{
 	case ePosition:
-		LogZA("Adding position\n");
 		e.set(
 			Position{ ParseFloat3(attr.value(), ",") }
 		);
 		break;
 	case eScale:
-		LogZA("Adding scale\n");
 		e.set(
 			Scale{ attr.as_float() }
 		);
 		break;
 	case eVelocity:
-		LogZA("Adding velocity\n");
 		e.set(
 			Velocity{ ParseFloat3(attr.value(), ",") }
 		);
 		break;
 	case eBouncePlane:
-		LogZA("Adding bounceplane\n");
 		e.set(
 			BouncePlane{ ParseFloat4(attr.value(), ",") }
 		);
 		break;
 	case eBounciness:
-		LogZA("Adding bounciness\n");
 		e.set(
 			Bounciness{ attr.as_float() }
 		);
 		break;
 	case eFrictionAmount:
-		LogZA("Adding friction amount\n");
 		e.set(
 			FrictionAmount{ attr.as_float() }
 		);
 		break;
 	case eGravity:
-		LogZA("Adding gravity : %f\n", ParseFloat3(attr.value(), ",")[1]);
 		e.set(
 			Gravity{ ParseFloat3(attr.value(), ",") }
 		);
