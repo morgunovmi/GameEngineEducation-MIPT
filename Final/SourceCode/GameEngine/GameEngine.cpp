@@ -33,10 +33,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     auto scriptSystem = std::make_unique<CScriptSystem>();
     auto soundSystem = std::make_unique<SoundSystem>();
 
+
     EntitySystem* entitySystem = new EntitySystem(renderEngine.get(),
-                                                  inputHandler.get(),
-                                                  scriptSystem.get(),
+                                                inputHandler.get(),
+                                                scriptSystem.get(),
+                                                soundSystem.get(),
                                                   "../../../Assets/worlds/world.xml");
+
+    soundSystem->StartSound("aria.mp3", true);
 
     MSG msg = { 0 };
 

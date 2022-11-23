@@ -11,3 +11,8 @@ void SoundSystem::Update()
 {
 	m_soundBackend->Update();
 }
+
+void SoundSystem::StartSound(const std::string& fileName, bool stream)
+{
+	m_soundBackend->StartSound(fileName, stream);
+}

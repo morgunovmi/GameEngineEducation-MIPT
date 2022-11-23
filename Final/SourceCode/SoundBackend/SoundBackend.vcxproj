@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Util\Log.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="FmodBackend.h" />
     <ClInclude Include="ISoundBackend.h" />

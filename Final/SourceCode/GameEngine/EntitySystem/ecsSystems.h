@@ -14,3 +14,8 @@ struct ScriptSystemPtr
 {
 	class CScriptSystem* ptr;
 };
+
+struct SoundSystemPtr
+{
+	class SoundSystem* ptr;
+};

@@ -8,7 +8,11 @@
 
 #include "../WorldLoader.h"
 
-EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandler, CScriptSystem* scriptSystem, std::string_view world_path)
+EntitySystem::EntitySystem(RenderEngine* renderEngine,
+						   InputHandler* inputHandler,
+						   CScriptSystem* scriptSystem,
+						   SoundSystem* soundSystem,
+						   std::string_view world_path)
 {
 	WorldLoader::ParseEntities(ecs, world_path);
 
@@ -18,6 +22,8 @@ EntitySystem::EntitySystem(RenderEngine* renderEngine, InputHandler* inputHandle
 		.set(RenderEnginePtr{ renderEngine });
 	ecs.entity("scriptSystem")
 		.set(ScriptSystemPtr{ scriptSystem });
+	ecs.entity("soundSystem")
+		.set(SoundSystemPtr{ soundSystem });
 
 	auto bullet = ecs.prefab("bullet")
 		.set(Position{ 0, 0, -100.f })
