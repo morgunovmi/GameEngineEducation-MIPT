@@ -8,6 +8,7 @@
 
 #include "GameEngine.h"
 #include "RenderEngine.h"
+#include "SoundSystem.h"
 #include "RenderThread.h"
 #include "GameTimer.h"
 #include "InputHandler.h"
@@ -30,6 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     auto* renderThread = renderEngine->GetRT();
     auto inputHandler = std::make_unique<InputHandler>();
     auto scriptSystem = std::make_unique<CScriptSystem>();
+    auto soundSystem = std::make_unique<SoundSystem>();
 
     EntitySystem* entitySystem = new EntitySystem(renderEngine.get(),
                                                   inputHandler.get(),
@@ -54,6 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             inputHandler->Update();
             scriptSystem->Update(timer.DeltaTime());
             entitySystem->Update();
+            soundSystem->Update();
 
             timer.Tick();
 

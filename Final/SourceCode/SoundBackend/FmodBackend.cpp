@@ -7,17 +7,21 @@
 
 void FmodBackend::Init()
 {
-    FMOD_RESULT result;
-    FMOD::System* system;
-    result = FMOD::System_Create(&system);
-    CHECK_RESULT(result);
+    CHECK_RESULT(FMOD::System_Create(&m_system));
+    CHECK_RESULT(m_system->init(32, FMOD_INIT_NORMAL, nullptr));
+}
 
-    m_system = std::unique_ptr<FMOD::System>(system);
-
-    result = m_system->init(32, FMOD_INIT_NORMAL, nullptr);
-    CHECK_RESULT(result);
+void FmodBackend::Update()
+{
+    CHECK_RESULT(m_system->update());
 }
 
 void FmodBackend::PlaySound(const std::string& filePath)
 {
+}
+
+FmodBackend::~FmodBackend()
+{
+    CHECK_RESULT(m_system->close());
+    CHECK_RESULT(m_system->release());
 }

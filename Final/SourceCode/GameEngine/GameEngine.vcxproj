@@ -137,7 +137,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\SDKs\flecs\src;$(SolutionDir)..\..\SDKs\inih\include;$(SolutionDir)RenderEngine\;$(SolutionDir)..\..\SDKs\sol2\include;$(SolutionDir)..\..\SDKs\lua\src;$(SolutionDir)Util;$(SolutionDir)ScriptSystem\;$(SolutionDir)WorldLoader\;$(SolutionDir)..\..\SDKs\pugixml\src\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\SDKs\flecs\src;$(SolutionDir)..\..\SDKs\inih\include;$(SolutionDir)SoundSystem\;$(SolutionDir)RenderEngine\;$(SolutionDir)..\..\SDKs\sol2\include;$(SolutionDir)..\..\SDKs\lua\src;$(SolutionDir)Util;$(SolutionDir)ScriptSystem\;$(SolutionDir)WorldLoader\;$(SolutionDir)..\..\SDKs\pugixml\src\</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -145,7 +145,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\SDKs\flecs\lib\$(Platform)\$(Configuration)\;$(SolutionDir)..\..\SDKs\inih\lib\$(Platform)\$(Configuration)\;$(SolutionDir)..\..\SDKs\bgfx\lib\$(Platform)\;$(SolutionDir)..\Bin\$(Configuration)$(Platform)\;$(SolutionDir)..\..\SDKs\lua\lib\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies);RenderEngine.lib;bgfxDebug.lib;bimg_decodeDebug.lib;bimgDebug.lib;bxDebug.lib;RenderBackend.lib;inih.lib;flecs.lib;ScriptSystem.lib;lua.lib</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);RenderEngine.lib;bgfxDebug.lib;bimg_decodeDebug.lib;bimgDebug.lib;bxDebug.lib;RenderBackend.lib;inih.lib;flecs.lib;ScriptSystem.lib;lua.lib;SoundSystem.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,7 +157,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\SDKs\flecs\src;$(SolutionDir)..\..\SDKs\inih\include;$(SolutionDir)RenderEngine\;$(SolutionDir)..\..\SDKs\sol2\include;$(SolutionDir)..\..\SDKs\lua\src;$(SolutionDir)Util</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\SDKs\flecs\src;$(SolutionDir)..\..\SDKs\inih\include;$(SolutionDir)SoundSystem\;$(SolutionDir)RenderEngine\;$(SolutionDir)..\..\SDKs\sol2\include;$(SolutionDir)..\..\SDKs\lua\src;$(SolutionDir)Util;</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -167,7 +167,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\SDKs\flecs\lib\$(Platform)\$(Configuration)\;$(SolutionDir)..\..\SDKs\inih\lib\$(Platform)\$(Configuration)\;$(SolutionDir)..\..\SDKs\bgfx\lib\$(Platform)\;$(SolutionDir)..\Bin\$(Configuration)$(Platform)\;$(SolutionDir)..\..\SDKs\lua\lib\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);RenderEngine.lib;bgfxRelease.lib;bimg_decodeRelease.lib;bimgRelease.lib;bxRelease.lib;RenderBackend.lib;inih.lib;flecs.lib;ScriptSystem.lib;lua.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);RenderEngine.lib;bgfxRelease.lib;bimg_decodeRelease.lib;bimgRelease.lib;bxRelease.lib;RenderBackend.lib;inih.lib;flecs.lib;ScriptSystem.lib;lua.lib;SoundSystem.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

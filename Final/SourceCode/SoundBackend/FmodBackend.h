@@ -9,7 +9,10 @@
 class SOUNDBACKEND_API FmodBackend : public ISoundBackend {
 public:
 	virtual void Init() override;
+	virtual void Update() override;
 	virtual void PlaySound(const std::string& filePath) override;
+	~FmodBackend();
+
 private:
-	std::unique_ptr<FMOD::System> m_system;
+	FMOD::System* m_system;
 };
