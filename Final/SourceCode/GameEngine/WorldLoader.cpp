@@ -62,7 +62,7 @@ void WorldLoader::ParseEntities(flecs::world& ecs, std::string_view world_path)
 					const auto component = componentMap.at(attr.name());
 					if (componentsInSection.find(component) == componentsInSection.end())
 					{
-						LogZA("Unexpected component in section %s\n", child.name());
+						Log("Unexpected component in section {}\n", child.name());
 						continue;
 					}
 					AddComponent(e, component, attr);
@@ -75,7 +75,7 @@ void WorldLoader::ParseEntities(flecs::world& ecs, std::string_view world_path)
 			}
 			else
 			{
-				LogZA("Unexpected entry in document\n");
+				Log("Unexpected entry in document\n");
 			}
 		}
 	}

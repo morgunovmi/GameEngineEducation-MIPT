@@ -28,7 +28,7 @@ void register_ecs_script_systems(flecs::world& ecs)
 								{
 									for (const auto& file : scriptProxies.script_files)
 									{
-										LogZA("Creating script from file %s\n", file.c_str());
+										Log("Creating script from file {}\n", file.c_str());
 										auto sp = ss.ptr->CreateProxy(file.c_str());
 
 										auto& lua = sp->GetLua();

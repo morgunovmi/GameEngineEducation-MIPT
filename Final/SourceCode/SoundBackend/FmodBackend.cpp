@@ -1,9 +1,15 @@
 #include "FmodBackend.h"
 #include "fmod_errors.h"
 
-#include <cassert>
+#include "Util/LidlAssert.h"
 
-#define CHECK_RESULT(result) assert(result == FMOD_OK && FMOD_ErrorString(result))
+#define CHECK_RESULT(expr)                                          \
+do                                                                  \
+{                                                                   \
+    const auto result = expr;                                       \
+    lidl_assert(result == FMOD_OK, "{}", FMOD_ErrorString(result)); \
+}                                                                   \
+while (false);
 
 void FmodBackend::Init()
 {
@@ -23,9 +29,13 @@ void FmodBackend::StartSound(const std::string& fileName, bool stream)
     {
         FMOD::Sound* sound{};
         if (stream)
+        {
             CHECK_RESULT(m_system->createStream(relativePath.c_str(), FMOD_LOOP_NORMAL | FMOD_2D, 0, &sound));
+        }
         else
+        {
             CHECK_RESULT(m_system->createSound(relativePath.c_str(), FMOD_DEFAULT, 0, &sound));
+        }
 
         CHECK_RESULT(m_system->playSound(sound, 0, false, &m_channel));
         m_loadedSounds[relativePath] = sound;
