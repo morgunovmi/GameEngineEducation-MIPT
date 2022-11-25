@@ -1,0 +1,4 @@
+[
+    {"soundName": "aria.mp3", "volume": 100.0, "stream": true},
+    {"soundName": "bruh.mp3", "volume": 10.0, "stream": false}
+]

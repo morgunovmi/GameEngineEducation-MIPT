@@ -12,7 +12,12 @@ void SoundSystem::Update()
 	m_soundBackend->Update();
 }
 
-void SoundSystem::StartSound(const std::string& fileName, bool stream)
+void SoundSystem::StartSound(const std::string& fileName, float volume, bool stream)
 {
-	m_soundBackend->StartSound(fileName, stream);
+	m_soundBackend->StartSound(fileName, volume, stream);
+}
+
+void SoundSystem::StartMood(const std::string& moodName)
+{
+	m_soundBackend->StartMood(moodName);
 }

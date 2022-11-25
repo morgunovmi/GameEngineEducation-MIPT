@@ -76,7 +76,8 @@ void register_ecs_script_systems(flecs::world& ecs)
 											);
 										lua.new_usertype<SoundSystem>(
 											"SoundSystem",
-											"StartSound", &SoundSystem::StartSound
+											"StartSound", &SoundSystem::StartSound,
+											"StartMood", &SoundSystem::StartMood
 											);
 										lua.new_usertype<flecs::entity>(
 											"Entity",
