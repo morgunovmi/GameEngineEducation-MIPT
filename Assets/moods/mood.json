@@ -1,4 +1,4 @@
 [
-    {"soundName": "aria.mp3", "volume": 100.0, "stream": true},
-    {"soundName": "bruh.mp3", "volume": 10.0, "stream": false}
+    {"soundName": "circus-ambience.wav", "volume": 30.0, "stream": true},
+    {"soundName": "circus.aiff", "volume": 50.0, "stream": false}
 ]

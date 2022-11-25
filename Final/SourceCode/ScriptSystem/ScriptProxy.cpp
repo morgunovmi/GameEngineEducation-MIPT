@@ -18,6 +18,6 @@ void CScriptProxy::Update(float dt)
 	const auto res = m_update(dt);
 	if (!res.valid()) {
 		sol::error err = res;
-		lidl_assert(false, "Couldn't run update: %s", err.what());
+		lidl_assert(false, "Couldn't run update: {}", err.what());
 	}
 }

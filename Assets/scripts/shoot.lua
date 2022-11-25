@@ -3,8 +3,7 @@ entity = world:GetEntity(entityId)
 inputState = inputHandler:GetInputState()
 gun = entity:GetGun()
 if inputState:Test(InputCommand.Fire) and gun.numRounds > 0 then
-    -- soundSystem:StartSound("bruh.mp3", false)
-    soundSystem:StartMood("mood.json", true)
+    soundSystem:StartSound("bruh.mp3", 40.0, false)
     pos = entity:GetPosition()
 
     b = world:CreateEntity()

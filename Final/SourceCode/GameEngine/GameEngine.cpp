@@ -40,7 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                                                 soundSystem.get(),
                                                   "../../../Assets/worlds/world.xml");
 
-    //soundSystem->StartSound("aria.mp3", true);
+    soundSystem->StartMood("mood.json");
 
     MSG msg = { 0 };
 
