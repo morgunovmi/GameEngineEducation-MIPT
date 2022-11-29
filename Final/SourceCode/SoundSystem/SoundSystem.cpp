@@ -12,9 +12,9 @@ void SoundSystem::Update()
 	m_soundBackend->Update();
 }
 
-void SoundSystem::StartSound(const std::string& fileName, float volume, bool stream)
+void SoundSystem::StartSound(const std::string& fileName, float volume, bool stream, bool loop)
 {
-	m_soundBackend->StartSound(fileName, volume, stream);
+	m_soundBackend->StartSound(fileName, volume, stream, loop);
 }
 
 void SoundSystem::StartMood(const std::string& moodName)

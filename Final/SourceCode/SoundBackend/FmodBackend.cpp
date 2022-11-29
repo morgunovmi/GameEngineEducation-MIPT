@@ -27,7 +27,7 @@ void FmodBackend::Update()
     CHECK_RESULT(m_system->update());
 }
 
-void FmodBackend::StartSound(const std::string& fileName, float volume, bool stream)
+void FmodBackend::StartSound(const std::string& fileName, float volume, bool stream, bool loop)
 {
     const auto relativePath = "../../../Assets/sounds/" + fileName;
 
@@ -37,11 +37,13 @@ void FmodBackend::StartSound(const std::string& fileName, float volume, bool str
         FMOD::Sound* sound{};
         if (stream)
         {
-            CHECK_RESULT(m_system->createStream(relativePath.c_str(), FMOD_DEFAULT, 0, &sound));
+            CHECK_RESULT(m_system->createStream(relativePath.c_str(), 
+                                loop ? FMOD_LOOP_NORMAL : FMOD_DEFAULT, 0, &sound));
         }
         else
         {
-            CHECK_RESULT(m_system->createSound(relativePath.c_str(), FMOD_DEFAULT, 0, &sound));
+            CHECK_RESULT(m_system->createSound(relativePath.c_str(),
+                                loop ? FMOD_LOOP_NORMAL : FMOD_DEFAULT, 0, &sound));
         }
 
         CHECK_RESULT(m_system->playSound(sound, 0, false, &channel));
@@ -68,7 +70,8 @@ void FmodBackend::StartMood(const std::string& moodName)
 
         for (const auto& sound : mood)
         {
-            StartSound(sound.soundName, sound.volume, sound.stream);
+            Log("{} : {}", sound.soundName, sound.loop);
+            StartSound(sound.soundName, sound.volume, sound.stream, sound.loop);
         }
     }
     else

@@ -11,7 +11,7 @@ class SOUNDBACKEND_API FmodBackend : public ISoundBackend {
 public:
 	virtual void Init() override;
 	virtual void Update() override;
-	virtual void StartSound(const std::string& fileName, float volume, bool stream) override;
+	virtual void StartSound(const std::string& fileName, float volume, bool stream, bool loop) override;
 	virtual void StartMood(const std::string& moodName) override;
 
 	~FmodBackend();

@@ -9,9 +9,10 @@ struct Sound {
 	std::string soundName;
 	float volume; // 0 - 100 range
     bool stream;
+    bool loop;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Sound, soundName, volume, stream)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Sound, soundName, volume, stream, loop)
 
 using Mood = std::vector<Sound>;
 

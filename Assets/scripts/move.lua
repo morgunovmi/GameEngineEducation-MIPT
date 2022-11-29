@@ -25,7 +25,7 @@ if inputState:Test(InputCommand.Jump) then
     pos = entity:GetPosition()
     plane = entity:GetBouncePlane()
     if plane.x * pos.x + plane.y * pos.y + plane.z * pos.z < plane.w + eps then
-        soundSystem:StartSound("boing.wav", 70.0, false)
+        soundSystem:StartSound("boing.wav", 70.0, false, false)
         entity:SetVelocity(velocity.x, jumpSpeed, velocity.z)
     end
 end
